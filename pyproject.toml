@@ -26,10 +26,6 @@ dependencies = [
 [project.optional-dependencies]
 train = ["deepspeed==0.9.5", "ninja", "wandb"]
 
-[project.urls]
-"Homepage" = ""
-"Bug Tracker" = ""
-
 [tool.setuptools.packages.find]
 exclude = ["assets*", "benchmark*", "docs", "dist*", "playground*", "scripts*", "tests*"]
 

@@ -1,9 +1,14 @@
 from huggingface_hub import hf_hub_download
 import zipfile
 from tqdm import tqdm
+import os
 
-repo_IDs = ["liuhaotian/LLaVA-CC3M-Pretrain-595K"]  # ["liuhaotian/LLaVA-Pretrain"]  # "liuhaotian/LLaVA-CC3M-Pretrain-595K"
-file_names = ["images.zip"]  # ["blip_laion_cc_sbu_558k.json", "images.zip"]             # [""]
+repo_IDs = ["liuhaotian/LLaVA-Pretrain", "BarryFutureman/LLaVA-Pretrain-Chunks"]  # "liuhaotian/LLaVA-CC3M-Pretrain-595K"
+file_names_lst = [["blip_laion_cc_sbu_558k.json"],
+                  ['chunk_1.zip', 'chunk_2.zip', 'chunk_3.zip', 'chunk_4.zip', 'chunk_5.zip', 'chunk_6.zip',
+                   'chunk_7.zip', 'chunk_8.zip', 'chunk_9.zip', 'chunk_10.zip', 'chunk_11.zip', 'chunk_12.zip',
+                   'chunk_13.zip', 'chunk_14.zip', 'chunk_15.zip', 'chunk_16.zip', 'chunk_17.zip', 'chunk_18.zip'],
+                  ]
 
 local_dir = "data/LLaVA-Pretrain"
 
@@ -24,11 +29,16 @@ def extract(zip_path, extract_path, percentage=0.02):
 
 
 if __name__ == '__main__':
-    for repo in repo_IDs:
+    for index, repo in enumerate(repo_IDs):
+        file_names = file_names_lst[index]
         for file_n in file_names:
-            """hf_hub_download(repo_id=repo, filename=file_n, local_dir=local_dir, resume_download=True,
-                            local_dir_use_symlinks=False, repo_type="dataset")"""
+            print(file_n)
+            hf_hub_download(repo_id=repo, filename=file_n, local_dir=local_dir, resume_download=True,
+                            local_dir_use_symlinks=False, repo_type="dataset")
 
             if file_n.endswith(".zip"):
-                extract(zip_path=f"{local_dir}/{file_n}",
-                        extract_path=f"{local_dir}/{file_n.replace('.zip', '')}")
+                zip_file_path = f"{local_dir}/{file_n}"
+                extract(zip_path=zip_file_path,
+                        extract_path=f"{local_dir}/images")
+
+                os.remove(zip_file_path)
