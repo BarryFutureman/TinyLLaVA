@@ -33,3 +33,7 @@ ckpts*
 
 # Demo
 serve_images/
+
+# Stuff
+/playground/data/LLaVA-Pretrain/
+/cache/
