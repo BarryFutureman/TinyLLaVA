@@ -1,5 +1,5 @@
-# from llava.model.language_model.llava_llama import LlamaForCausalLM
-from transformers import BitsAndBytesConfig, AutoTokenizer, LlamaForCausalLM
+from llava.model.language_model.llava_llama import LlamaForCausalLM
+from transformers import BitsAndBytesConfig, AutoTokenizer
 import torch
 
 

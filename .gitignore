@@ -39,3 +39,7 @@ serve_images/
 /cache/
 /playground/break_down_image_zip.py
 /playground/upload_dataset.py
+/tiny-llava-pretrain/
+/playground/data/cc_sbu_align/
+/playground/data/cc_sbu_align_llava/
+/playground/make_llava_style_dataset.py
