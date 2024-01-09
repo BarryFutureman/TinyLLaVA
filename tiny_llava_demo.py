@@ -30,7 +30,8 @@ def main(args):
     disable_torch_init()
 
     model_name = get_model_name_from_path(args.model_path)
-    tokenizer, model, image_processor, context_len = load_pretrained_model(args.model_path, args.model_base, model_name, args.load_8bit, False, device=args.device)
+    tokenizer, model, image_processor, context_len = load_pretrained_model(args.model_path, args.model_base, model_name,
+                                                                           args.load_8bit, load_in_4bit=False, device=args.device)
 
     if 'llama-2' in model_name.lower():
         conv_mode = "llava_llama_2"
@@ -111,23 +112,16 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model-path", type=str, default="tiny-llava-pretrain/checkpoint-final")
-    parser.add_argument("--model-base", type=str, default="TinyLlama/TinyLlama-1.1B-Chat-v1.0")
-    parser.add_argument("--image-file", type=str, default="img_9.png")
+    parser.add_argument("--model-path", type=str, default="C:\Files\PycharmProjects\TinyLLaVA\TinyLLaVA\checkpoints\TinyLLaVA-1.1B-pretrained-projector")
+    parser.add_argument("--model-base", type=str, default="C:\Files\PycharmProjects\TinyLLaVA\merged\TinyLLaVA_1.1B_align_consolidated")
+    parser.add_argument("--image-file", type=str, default="img.png")
     parser.add_argument("--device", type=str, default="cuda")
     parser.add_argument("--conv-mode", type=str, default=None)
-    parser.add_argument("--temperature", type=float, default=0.2)
-    parser.add_argument("--max-new-tokens", type=int, default=512)
+    parser.add_argument("--temperature", type=float, default=0.7)
+    parser.add_argument("--max-new-tokens", type=int, default=64)
     parser.add_argument("--load-8bit", action="store_true")
-    # parser.add_argument("--load-4bit", action="store_false")
+    # parser.add_argument("--load-4bit", action="store_true")
     parser.add_argument("--debug", action="store_true")
     parser.add_argument("--mm_projector_type", type=str, default="mlp2x_gelu")
-    parser.add_argument("--mm_vision_select_layer", type=int, default=-2)
-    parser.add_argument("--mm_use_im_start_end", type=bool, default=False)
-    parser.add_argument("--mm_use_im_patch_token", type=bool, default=False)
-    parser.add_argument("--vision_tower", type=str, default="openai/clip-vit-large-patch14-336")
-    parser.add_argument("--mm_vision_select_feature", type=str, default="patch")
-    parser.add_argument("--pretrain_mm_mlp_adapter", type=Optional[str], default=None)
-    parser.add_argument("--tune_mm_mlp_adapter", type=bool, default=True)
     args = parser.parse_args()
     main(args)

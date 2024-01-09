@@ -43,3 +43,4 @@ serve_images/
 /playground/data/cc_sbu_align/
 /playground/data/cc_sbu_align_llava/
 /playground/make_llava_style_dataset.py
+/playground/data/OCR-VQA/

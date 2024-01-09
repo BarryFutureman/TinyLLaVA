@@ -12,12 +12,13 @@ bnb_config = BitsAndBytesConfig(
 )
 
 
-base_model_name = "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
+base_model_name = "C:\Files\PycharmProjects\TinyLLaVA\merged\TinyLLaVA_1.1B_align_consolidated"
 
 model = LlamaForCausalLM.from_pretrained(base_model_name,
                                          torch_dtype=torch.float16,
                                          quantization_config=bnb_config,
-                                         cache_dir="cache/models",
+                                         local_files_only=True,
+                                         # cache_dir="cache/models",
                                          )
 
 tokenizer = AutoTokenizer.from_pretrained(base_model_name, cache_dir="cache/models")
